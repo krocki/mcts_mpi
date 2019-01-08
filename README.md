@@ -1,4 +1,4 @@
-# Monte Carlo Tree Search with MPI
+# GPU Monte Carlo Tree Search with MPI
 
 # TL;DR
 * Solves checkers/reversi (why didn't I do GO?)
