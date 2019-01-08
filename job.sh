@@ -3,6 +3,7 @@
 #
 # sample
 #
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 mpirun -np 1 mcts --benchIter=250 --time=200 --cpuThreads=2 --blocks=4 --threads=64
 #mpirun -np 2 mcts --benchIter=250 --time=200 --cpuThreads=2 --blocks=4 --threads=64 >> at30_cpu2_200ms.txt
 #mpirun -np 3 mcts --benchIter=250 --time=200 --cpuThreads=3 --blocks=8 --threads=64 >> at30_cpu3_200ms.txt
