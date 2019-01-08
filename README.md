@@ -1,7 +1,8 @@
 # Monte Carlo Tree Search with MPI
 
 # TL;DR
-### Solves checkers/reversi (why didn't I do GO?)
+* Solves checkers/reversi (why didn't I do GO?)
+* Includes **self-play**
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
 
@@ -18,8 +19,6 @@
 ### Has a very minimal ssh-friendly interface
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif" width="150" />
-
-### Includes **self-play**
 
 
 # THESIS + BIBTEX
