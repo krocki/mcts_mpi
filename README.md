@@ -7,19 +7,20 @@
 
 ### Runs on GPU (CUDA) or CPU (C++)
 
-#### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
+###### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
 
-* Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
+### Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png" width="200" />
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_4.png" width="200" />
 
-* Has a very minimal ssh-friendly interface
-
-* Includes **self-play**
+### Has a very minimal ssh-friendly interface
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif" width="150" />
+
+### Includes **self-play**
+
 
 # THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf) [Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
