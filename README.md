@@ -14,8 +14,7 @@
 
 * Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png" width="200" />
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png" width="200" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png" width="500" />
 
 * Has a very minimal ssh-friendly interface
 
