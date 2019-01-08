@@ -1,13 +1,13 @@
 # GPU Monte Carlo Tree Search with MPI
 
 # TL;DR
-* Solves checkers/reversi (why didn't I do GO?)
-* Includes **self-play**
+###### Solves checkers/reversi (why didn't I do GO?)
+###### Includes **self-play**
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts.png "MCTS")
 
-* Runs on GPU (CUDA) or CPU (C++)
+###### Runs on GPU (CUDA) or CPU (C++)
 
 ###### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
 
@@ -17,11 +17,11 @@
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png" width="500" />
 
-* Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
+###### Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png" width="500" />
 
-* Has a very minimal ssh-friendly interface
+###### Has a very minimal ssh-friendly interface
 
 ![Alt Text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_16.gif)
 
