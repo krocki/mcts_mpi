@@ -9,9 +9,9 @@
 
 ###### Runs on GPU (CUDA) or CPU (C++)
 
-###### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
-
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_3.png "REVERSI")
+
+###### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
 
 ###### GPU version is quite efficient actually ( here is the score advantage plotted on the y-axis vs time, playing againt a single-core CPU)
 
