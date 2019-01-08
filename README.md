@@ -1,14 +1,15 @@
 # Monte Carlo Tree Search with MPI
 
 # TL;DR
-1. Solves checkers/reversi
+1. Solves checkers/reversi (why didn't I do GO?)
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png" width="150" />
 2. Runs on GPU (CUDA) or CPU (C++)
 3. Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png "MPI"){ width: 150px; }
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png" width="200" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_4.png" width="200" />
 4. Has a very minimal ssh-friendly interface
 5. Includes **self-play**
-
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif "MCTS"){ width: 150px; }
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif" width="150" />
 
 # THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf) [Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
@@ -21,13 +22,7 @@
   school={School of Information Science and Technology, The University of Tokyo}
 }
 ```
-
-# IMAGES
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "Reversi")
-
-
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png "Reversi")
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_1.png "Reversi")
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_1.png" width="200" />
 
 # CAUTION:
 This code has been tested in 2010 on CUDA 3.0.
