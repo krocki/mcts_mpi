@@ -8,8 +8,7 @@
 5. Includes **self-play**
 
 # THESIS + BIBTEX
-[Thesis][http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf]
-[Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
+[Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf) [Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
 
 ```
 @phdthesis{rocki2011large,
