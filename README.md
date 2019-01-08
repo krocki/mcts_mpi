@@ -13,7 +13,7 @@
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_3.png "REVERSI")
 
-###### GPU version is quite efficient actually ( here is the score plotted on the y-axis, playing againt a single-core CPU)
+###### GPU version is quite efficient actually ( here is the score advantage plotted on the y-axis vs time, playing againt a single-core CPU)
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png "SCORE")
 
