@@ -1,14 +1,14 @@
 # Monte Carlo Tree Search with MPI
 
 # TL;DR
-1. Solves checkers/reversi (why didn't I do GO?)
+###### Solves checkers/reversi (why didn't I do GO?)
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png" width="150" />
-2. Runs on GPU (CUDA) or CPU (C++)
-3. Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
+###### Runs on GPU (CUDA) or CPU (C++)
+###### Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png" width="200" />
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_4.png" width="200" />
-4. Has a very minimal ssh-friendly interface
-5. Includes **self-play**
+###### Has a very minimal ssh-friendly interface
+###### Includes **self-play**
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif" width="150" />
 
 # THESIS + BIBTEX
