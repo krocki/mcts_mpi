@@ -15,7 +15,7 @@
 
 ###### GPU version is quite efficient actually ( here is the score advantage plotted on the y-axis vs time, playing againt a single-core CPU)
 
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png "SCORE")
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png" width="500" />
 
 * Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
