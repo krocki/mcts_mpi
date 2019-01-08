@@ -15,15 +15,15 @@
 
 ###### GPU version is quite efficient actually ( here is the score advantage plotted on the y-axis vs time, playing againt a single-core CPU)
 
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png" width="500" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png" width="600" />
 
 ###### Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png" width="500" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png" width="600" />
 
 ###### Has a very minimal ssh-friendly interface
 
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_16.gif" width="500" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_16.gif" width="600" />
 
 # THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf)
@@ -32,7 +32,7 @@
 ```
 @phdthesis{rocki2011large,
   title={Large Scale Monte Carlo Tree Search on GPU},
-  author={Rocki, Kamil Marek},
+  author={Rocki, Kamil Marek},500
   year={2011},
   school={School of Information Science and Technology, The University of Tokyo}
 }
