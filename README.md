@@ -1,13 +1,13 @@
 # Monte Carlo Tree Search with MPI
 
 # TL;DR
-* Solves checkers/reversi (why didn't I do GO?)
+### Solves checkers/reversi (why didn't I do GO?)
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
 
-* Runs on GPU (CUDA) or CPU (C++)
+### Runs on GPU (CUDA) or CPU (C++)
 
-Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
+#### Over 1 million game simulations/second on a single 8 year old 280 GTX GPU.
 
 * Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
