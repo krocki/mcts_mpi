@@ -25,7 +25,7 @@ mcts:		./out/main.o ./out/common.o ./out/reversi.o ./out/cut.o ./out/mpi.o  ./ou
 		mpicxx -O3 -o ./out/mpi.o -c  ./src/mpi.c
 
 ./out/mcts.o: 		./src/mcts.cu ./src/headers.h ./src/common.c ./src/reversi.c ./src/reversi.h ./src/mpi.c ./src/mcts_gpu.cu
-		nvcc -O3 --use_fast_math --ptxas-options=-v -lcudart -lcuda -L/usr/local/cuda/lib64 -I/usr/local/cuda/include -o ./out/mcts.o -c  ./src/mcts.cu
+		/usr/local/cuda/bin/nvcc -O3 --use_fast_math --ptxas-options=-v -lcudart -lcuda -L/usr/local/cuda/lib64 -I/usr/local/cuda/include -o ./out/mcts.o -c  ./src/mcts.cu
 		
 ./out/cutil.o:		./src/parser/cutil.cpp ./src/parser/cutil.h
 		mpicxx -O3 -o ./out/cutil.o -c  ./src/parser/cutil.cpp
