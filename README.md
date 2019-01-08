@@ -23,7 +23,7 @@
 
 ###### Has a very minimal ssh-friendly interface
 
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_16.gif" width="600" />
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts12_small.gif" width="600" />
 
 # THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf)
