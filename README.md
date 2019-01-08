@@ -5,7 +5,7 @@
 * Includes **self-play**
 
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mcts.png "MCTS")
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts.png "MCTS")
 
 * Runs on GPU (CUDA) or CPU (C++)
 
@@ -15,7 +15,7 @@
 
 ###### GPU version is quite efficient actually ( here is the score plotted on the y-axis, playing againt a single-core CPU)
 
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/score.png "SCORE")
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/score.png "SCORE")
 
 * Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
 
