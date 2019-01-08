@@ -1,31 +1,190 @@
-#include "headers.h"
+#ifndef _MCTS_GPU_CU_
+#define _MCTS_GPU_CU_
 
-#ifdef CURSES
-#include <ncurses.h>
-#endif
+#include "headers_gpu.h"
 
-short scoreCPU (node board, int player) {
-	
-    short score = 0;
-    int x,y;
-    
-	for (x = 0; x < 8; x++)
-        for (y = 0; y < 8; y++)
-            score += BOARD_GET_SCORE(board, x, y, player);// -  BOARD_GET_SCORE(board, x, y, !player);
-    
-	return score;
-	
-}
+/*__constant__ short BitsSetTable256[256] =
+ 
+ {
+ 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
+ 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+ 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+ 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+ 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+ 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+ 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+ 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8
+ };*/
 
 #define CHECK_DIR(x,y,who) \
 if (!IS_OCCUPIED(board, x, y))\
 {\
-dirs = move(board, x, y, who);\
+dirs = moveGPU(board, x, y, who);\
 if (IS_SET_DIR_ANY(dirs) && MAX_TASKS_STATIC > t.howMany)\
-t.taskList[(short)(t.howMany++)] = flip(board, dirs, x, y, who);\
+t.taskList[t.howMany++] = flipGPU(board, dirs, x, y, who);\
 }
 
-tasks getChildren (int who, node board) {
+#define MAX_GPU_THREADS 1024
+#define GROUP 32
+
+void checkCUDAError(const char *msg);
+__device__ short scoreGPU (node board, int player);
+__global__ void MCTS(node* i_value, short *s, short player, short* random);
+__host__ __device__ tasks getChildrenGPU (int who, node board);
+__device__ __host__ node flipGPU (node board, int dirs, int x, int y, int player);
+__host__ __device__ int moveGPU (node board, int x, int y, int player);
+__device__ short rG(node startBoard, int startPlayer, short* randoms, short maxDepth, int randOffset, int master_player);
+__device__ short rG2(node startBoard, int startPlayer, short* randoms, short maxDepth, int randOffset, int master_player);
+
+__global__ void MCTS(node* i_value, short *s, short player, short* randoms) {
+	
+	const unsigned long total = gridDim.x * blockDim.x;
+	const unsigned long tid = (blockDim.x * blockIdx.x + threadIdx.x);
+    
+	short startPlayer;//[MAX_GPU_THREADS];
+	
+	startPlayer = randoms[total+3 ];
+	
+	int depth = randoms[total+1];
+	short master_player = randoms[total+2];
+	
+	//s[tid] = 0;
+	
+	s[tid] = rG2(i_value[blockIdx.x * blockDim.x], startPlayer, randoms, 60, 0, master_player);
+    
+	__syncthreads();
+	
+}
+
+void checkCUDAError(const char *msg)
+{
+    cudaError_t err = cudaGetLastError();
+    if( cudaSuccess != err)
+    {
+        fprintf(stderr, "Cuda error: %s: %s.\n", msg, cudaGetErrorString( err) );
+        exit(-1);
+    }
+}
+
+__device__ short scoreGPU (node board, int player) {
+	
+    short score = 0;
+    int x,y;
+    /*	for (x = 0; x < 2; x++) {
+     score +=  ((BitsSetTable256[board.blackOrWhite[player][x]] -   BitsSetTable256[board.blackOrWhite[!player][x]]) +
+     (BitsSetTable256[board.blackOrWhite[player][x+2]] - BitsSetTable256[board.blackOrWhite[!player][x+2]])+
+     (BitsSetTable256[board.blackOrWhite[player][x+4]] - BitsSetTable256[board.blackOrWhite[!player][x+4]])+
+     (BitsSetTable256[board.blackOrWhite[player][x+6]] - BitsSetTable256[board.blackOrWhite[!player][x+6]]));
+     }
+     */
+	for (x = 0; x < 8; x++)
+        for (y = 0; y < 8; y++)
+            score += BOARD_GET_SCORE(board, x, y, player) -  BOARD_GET_SCORE(board, x, y, !player);
+    
+	return score;
+	
+}
+//#define SMEM
+__device__ short rG2(node startBoard, int startPlayer, short* randoms, short maxDepth, int randOffset, int master_player) {
+	
+	
+    const unsigned long tid = (blockDim.x * blockIdx.x + threadIdx.x);
+    const unsigned long total = gridDim.x * blockDim.x;
+    __shared__ short localrands[128];
+    
+#ifdef SMEM
+	//__syncthreads();
+    localrands[threadIdx.x] = randoms[tid];
+    // __syncthreads();
+#endif
+    tasks temp;
+    int rand;
+    int result = 0;
+    
+    for (int i = 0; i < maxDepth; i++) {
+        
+        temp = getChildrenGPU(startPlayer, startBoard);
+        
+        if (temp.howMany > 0)
+        {
+            //put to shared mem
+            //
+#ifdef SMEM
+            rand = localrands[(threadIdx.x + i) % blockDim.x] % temp.howMany;
+#else
+            rand = randoms[(tid + i) % total] % temp.howMany;
+#endif
+            startBoard = temp.taskList[rand];
+            startPlayer = !startPlayer;
+            __syncthreads();
+        }
+        
+        
+        else break;
+        __syncthreads();
+        
+    }
+    
+	//if (scoreGPU(startBoard,master_player) > 0) result = 1;
+    //result = scoreGPU(startBoard,master_player);
+	return 64 - scoreGPU(startBoard,!master_player);
+}
+
+__device__ short rG(node startBoard, int startPlayer, short* randoms, short maxDepth, int randOffset, int master_player) {
+	
+	
+    const unsigned long tid = (blockDim.x * blockIdx.x + threadIdx.x);
+    const unsigned long total = gridDim.x * blockDim.x;
+    __shared__ short localrands[128];
+    
+#ifdef SMEM
+	//__syncthreads();
+    localrands[threadIdx.x] = randoms[tid];
+    // __syncthreads();
+#endif
+    tasks temp;
+    int rand;
+    int result = 0;
+    
+    for (int i = 0; i < maxDepth; i++) {
+        
+        temp = getChildrenGPU(startPlayer, startBoard);
+        
+        if (temp.howMany > 0)
+        {
+            //put to shared mem
+            //
+#ifdef SMEM
+            rand = localrands[(threadIdx.x + i) % blockDim.x] % temp.howMany;
+#else
+            rand = randoms[(tid + i) % total] % temp.howMany;
+#endif
+            startBoard = temp.taskList[rand];
+            startPlayer = !startPlayer;
+            __syncthreads();
+        }
+        
+        
+        else break;
+        __syncthreads();
+        
+    }
+    
+	if (scoreGPU(startBoard,master_player) > 0) result = 1;
+    //result = scoreGPU(startBoard,master_player);
+	return result;
+}
+
+
+__host__ tasks getChildrenGPU (int who, node board) {
 	
 	tasks t;
 	t.howMany = 0;
@@ -54,7 +213,8 @@ tasks getChildren (int who, node board) {
     
 }
 
-node flip (node board, int dirs, int x, int y, int player) {
+
+__device__ __host__ node flipGPU (node board, int dirs, int x, int y, int player) {
 	
 	int i;
 	
@@ -92,12 +252,11 @@ node flip (node board, int dirs, int x, int y, int player) {
         for (i = 1; !BOARD_IS_SET(board, x - i, y - i, player); i++)
             BOARD_FLIP(board, x - i, y - i);
     
-    
 	return board;
     
 }
 
-int move (node board, int x, int y, int player) {
+__host__ __device__ int moveGPU (node board, int x, int y, int player) {
 	
 	int dirs = 0;
 	int i;
@@ -251,116 +410,4 @@ int move (node board, int x, int y, int player) {
 	
 }
 
-node initBoard (void) {
-    
-	node board;
-	int i,j;
-	
-	//clear
-	for (j = 0; j < 8; j++)
-        for (i = 0; i < 8; i++)
-            BOARD_CLEAR(board, j, i);
-    
-	//black
-	BOARD_SET_PLAYER(board, 4, 4, BLACK);
-	BOARD_SET_PLAYER(board, 3, 3, BLACK);
-    
-    //white
-	BOARD_SET_PLAYER(board, 3, 4, WHITE);
-	BOARD_SET_PLAYER(board, 4, 3, WHITE);
-    
-	return board;
-}
-
-void printBoard (node board) {
-    
-//#ifndef CURSES
-	int k,l;
-    
-    printf (" +-A-B-C-D-E-F-G-H+\n");
-    
-	for (k = 0; k < 8; k++)
-    {
-        
-		printf ("%d|", k);
-        
-		for (l = 0; l < 8; l++)
-            if (BOARD_IS_SET(board, k, l, BLACK))
-                printf("-1");
-            else if (BOARD_IS_SET(board, k, l, WHITE))
-                printf(" 1");
-            else printf(" 0");
-		printf ("|%d\n", k);
-        
-    }
-    
-    printf (" +-A-B-C-D-E-F-G-H+\n");
-    
-//#endif
-    
-}
-
-
-void printBoardCurses (node board) {
-    
-#ifdef CURSES
-    
-    int row,col;
-    getmaxyx(stdscr,row,col);
-    int posx = 0;
-    int posy = 0;
-    
-    
-    attron(COLOR_PAIR(3));
-    mvprintw (posy,  posx+1,"   A  |  B  |  C  |  D  |  E  |  F  |  G  |  H   \n");
-    mvprintw (posy+1,posx+1,"#===============================================#\n");
-    mvprintw (posy+27,  posx+1, "   A  |  B  |  C  |  D  |  E  |  F  |  G  |  H   \n");
-    mvprintw (posy+26,posx+1,"#===============================================#\n");
-    attroff(COLOR_PAIR(3));
-    
-    for (int k = 0; k < 8; k++)	{
-		
-        attron(COLOR_PAIR(3));
-        mvprintw (posy+k*3+2,posx+1,"|");
-        mvprintw (posy+k*3+2,posx+49,"|");
-        mvprintw (posy+k*3+3,posx,"%d|",k);
-        mvprintw (posy+k*3+3,posx+49,"|%d",k);
-        mvprintw (posy+k*3+4,posx+1,"|", k);
-        mvprintw (posy+k*3+4,posx+49,"|", k);
-        attroff(COLOR_PAIR(3));
-		
-        for (int l = 0; l < 8; l++)
-			if (BOARD_IS_SET(board, k, l, BLACK)){ 
-				attron(COLOR_PAIR(1));
-				attron(A_BOLD); 
-				attron(A_REVERSE); 
-				mvprintw (posy+k*3+3,posx+l*6+2,"[ 2 ]");
-				attroff(A_REVERSE); 
-				attroff(COLOR_PAIR(1));
-				attroff(A_BOLD); 
-			}
-        
-			else if (BOARD_IS_SET(board, k, l, WHITE)){ 
-				attron(A_BOLD); 
-				attron(COLOR_PAIR(2));
-				attron(A_REVERSE); 
-				mvprintw (posy+k*3+3,posx+l*6+2,"[ 1 ]");
-				attroff(A_REVERSE); 
-				attroff(COLOR_PAIR(2));
-				attroff(A_BOLD);  
-			}
-			else {
-				attron(COLOR_PAIR(3));
-				attron(A_DIM);
-				mvprintw (posy+k*3+2,posx+l*6+2,"  |  "); 
-				mvprintw (posy+k*3+3,posx+l*6+2," -+- ");
-				mvprintw (posy+k*3+4,posx+l*6+2,"  |  ");
-				attroff(A_DIM);
-				attroff(COLOR_PAIR(3));
-                
-            }
-    }
-    
 #endif
-    
-}

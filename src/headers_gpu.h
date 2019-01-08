@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <mpi.h>
+//#include <mpi.h>
 #include <sys/time.h>
 #include <math.h>
 #include <time.h>
@@ -129,8 +129,6 @@ typedef struct {
     int					gpuThreads;
     short				blocks;
     short				threads;
-    short				device;
-    short				MCTS_ver;
     
 } cmdArguments;
 
@@ -168,10 +166,8 @@ extern int 				runMPISimulation(int numprocs, int rank, char* processor_name, in
 extern int 				runMPISimulation_thread(int numprocs, int rank, char* processor_name, int namelen, node board, int player, int masterPlayer, int searchDepth);
 extern void 			printMCTSnode (MCTSnode* node, float C, short includeChildren);
 extern MCTSnode*		MCTS (node board, short who, short masterPlayer, short depth, float maxTime, float C, struct timeval startTime, int id, int max);
-extern MCTSnode*		MCTS_GPU (node board, short who, short masterPlayer, short depth, float maxTime, float C, struct timeval startTime, int id, int max, short b, short t , short device);
-extern MCTSnode*		MCTS_GPU_root (node board, short who, short masterPlayer, short depth, float maxTime, float C, struct timeval startTime, int id, int max, short b, short t, short device );
+extern MCTSnode*		MCTS_GPU (node board, short who, short masterPlayer, short depth, float maxTime, float C, struct timeval startTime, int id, int max, short b, short t );
 extern MCTSnode*		MCTS_test (node board, short who, short masterPlayer, short depth, float maxTime, float C, struct timeval startTime, int id, int max);
-void setDevice(short device) ;
 extern tasks 			getChildren (int who, node board);
 extern node 			flip (node board, int dirs, int x, int y, int player);
 extern int 				move (node board, int x, int y, int player);
