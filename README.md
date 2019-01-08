@@ -4,10 +4,11 @@
 1. Solves checkers/reversi
 2. Runs on GPU (CUDA) or CPU (C++)
 3. Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png "Reversi")
 4. Has a very minimal ssh-friendly interface
 5. Includes **self-play**
 
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mcts_0.gif "MCTS")
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_0.gif "MCTS"){ width: 200px; }
 
 # THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf) [Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
@@ -24,9 +25,9 @@
 # IMAGES
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "Reversi")
 
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png "Reversi")
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_4.png "Reversi")
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_1.png "Reversi")
+
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_4.png "Reversi")
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/phd_1.png "Reversi")
 
 # CAUTION:
 This code has been tested in 2010 on CUDA 3.0.
