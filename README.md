@@ -7,9 +7,10 @@
 4. Has a very minimal ssh-friendly interface
 5. Includes **self-play**
 
-[http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf][Link to PhD Thesis]
+# THESIS + BIBTEX
+[Thesis][http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf]
+[Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
 
-# BIBTEX
 ```
 @phdthesis{rocki2011large,
   title={Large Scale Monte Carlo Tree Search on GPU},
@@ -19,13 +20,12 @@
 }
 ```
 
+# IMAGES
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "Reversi")
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_3.png "Reversi")
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/mpi.png "Reversi")
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_4.png "Reversi")
 ![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_1.png "Reversi")
-
-[http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf][Slides]
 
 # CAUTION:
 This code has been tested in 2010 on CUDA 3.0.
