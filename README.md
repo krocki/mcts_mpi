@@ -2,7 +2,7 @@
 
 # TL;DR
 * Solves checkers/reversi (why didn't I do GO?)
-<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png" width="150" />
+![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
 * Runs on GPU (CUDA) or CPU (C++)
 
 * Scales up nicely using MPI to a large distributed system (tested on a 2048-node supercomputer, up to 3.5M GPU threads)
