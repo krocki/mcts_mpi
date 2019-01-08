@@ -4,8 +4,7 @@
 ###### Solves checkers/reversi (why didn't I do GO?)
 ###### Includes **self-play**
 
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png "REVERSI")
-![alt text](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts.png "MCTS")
+<img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/tree.png" width="400" /> <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts.png" width="400" />
 
 ###### Runs on GPU (CUDA) or CPU (C++)
 
