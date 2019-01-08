@@ -32,7 +32,7 @@
 ```
 @phdthesis{rocki2011large,
   title={Large Scale Monte Carlo Tree Search on GPU},
-  author={Rocki, Kamil Marek},500
+  author={Rocki, Kamil Marek},
   year={2011},
   school={School of Information Science and Technology, The University of Tokyo}
 }
