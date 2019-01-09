@@ -24,7 +24,8 @@
 
 <img src="http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/research/mcts_git.gif" width="400" />
 
-# THESIS + BIBTEX
+# I used this code while working on my PhD thesis. The MPI version has been tested on the Japanese TSUBAME supercomputer.
+### THESIS + BIBTEX
 [Thesis](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/phd_thesis.pdf)
 [Slides](http://olab.is.s.u-tokyo.ac.jp/~kamil.rocki/gpu_mcts_slides.pdf)
 
